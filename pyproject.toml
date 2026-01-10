@@ -1,0 +1,88 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "squirrel-detector"
+version = "0.1.0"
+description = "A Raspberry Pi application to detect squirrels in camera view and trigger GPIO"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [
+    {name = "Squirrel Project Contributors"}
+]
+keywords = ["raspberry-pi", "camera", "gpio", "squirrel-detection", "computer-vision"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Image Recognition",
+]
+dependencies = [
+    "opencv-python>=4.8.0",
+    "numpy>=1.24.0",
+    "Pillow>=10.0.0",
+]
+
+[project.optional-dependencies]
+pi = [
+    "picamera2>=0.3.12",
+    "gpiozero>=1.6.2",
+]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+    "pytest-mock>=3.11.1",
+    "black>=23.7.0",
+    "ruff>=0.0.287",
+    "pre-commit>=3.3.3",
+]
+
+[project.scripts]
+squirrel-detector = "squirrel.main:main"
+
+[project.urls]
+Homepage = "https://github.com/yourusername/squirrel"
+Issues = "https://github.com/yourusername/squirrel/issues"
+Repository = "https://github.com/yourusername/squirrel"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --cov=squirrel --cov-report=term-missing --cov-report=html"
+
+[tool.black]
+line-length = 100
+target-version = ['py310', 'py311', 'py312', 'py313']
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+select = ["E", "F", "W", "I", "N", "UP", "ANN", "S", "B", "A", "C4", "DTZ", "T10", "EM", "ISC", "ICN", "G", "PIE", "T20", "PYI", "PT", "Q", "RSE", "RET", "SIM", "ARG", "PTH", "ERA", "PD", "PGH", "PL", "TRY", "FLY", "NPY", "PERF", "FURB", "LOG", "RUF"]
+ignore = ["E501", "ANN101", "ANN102"]
+
+[tool.coverage.run]
+source = ["src/squirrel"]
+omit = ["*/tests/*", "*/test_*.py"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+    "@abstractmethod",
+]
