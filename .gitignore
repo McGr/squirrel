@@ -68,3 +68,12 @@ COMMIT_MESSAGE.txt
 .github-token
 *_token.txt
 *_PAT.txt
+
+# ML Training outputs
+runs/
+*.pt
+!models/wildlife_detector.pt
+yolov8*.pt
+training/datasets/synthetic/
+training/test_images/
+training/runs/
