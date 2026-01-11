@@ -61,3 +61,10 @@ Thumbs.db
 # Commit log (maintained locally, not committed)
 COMMIT_LOG.md
 COMMIT_MESSAGE.txt
+
+# Personal Access Tokens (NEVER commit these!)
+*.pat
+.github-pat
+.github-token
+*_token.txt
+*_PAT.txt
