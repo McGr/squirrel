@@ -47,6 +47,7 @@ dev = [
 
 [project.scripts]
 squirrel-detector = "squirrel.main:main"
+wildlife-detector = "squirrel.main_ml:main"
 
 [project.urls]
 Homepage = "https://github.com/yourusername/squirrel"
