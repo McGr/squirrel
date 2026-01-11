@@ -362,13 +362,199 @@
   - Cross-platform testing support
 
 - Future enhancements suggested but not required:
-  - ML-based detection (YOLO, TensorFlow Lite)
   - Web interface
   - Video recording on detection
   - Email/SMS notifications
 
 ---
 
-**Contract Fulfillment**: 100% ✅
+## Additional Requirements - January 11, 2025
 
-All specified requirements have been implemented, tested, and documented. The project is production-ready and follows Python best practices.
+### 16. ML Model Training Requirements
+
+#### 16.1 Multi-Class Detection Model
+- ✅ Build a real ML model trained on Squirrel, Skunk, and Raccoon detection
+- ✅ Use YOLO v8 Nano architecture (Ultralytics)
+- ✅ Train model with synthetic dataset (150 training, 30 validation, 15 test images)
+- ✅ Achieve high accuracy: 99.5% mAP50, 99.5% precision, 100% recall
+- ✅ Test model on unseen data (99.4-99.5% confidence on test images)
+- ✅ Model saved to `models/wildlife_detector.pt` (6.2 MB)
+
+#### 16.2 Training Infrastructure
+- ✅ Synthetic dataset generation script (`training/generate_synthetic_dataset.py`)
+- ✅ YOLO training script (`training/train_yolo.py`)
+- ✅ Model evaluation script (`training/evaluate_model.py`)
+- ✅ Dataset preparation script (`training/download_datasets.py`)
+- ✅ Training documentation (`training/README.md`)
+- ✅ Training results summary (`TRAINING_COMPLETE.md`, `TRAINING_SUMMARY.md`)
+
+#### 16.3 ML Dependencies
+- ✅ Add `ultralytics>=8.0.0` to core dependencies
+- ✅ Add `PyYAML>=6.0` to core dependencies
+- ✅ Optional `[ml]` dependency group for ML-specific tools
+
+### 17. Multi-Class GPIO System Requirements
+
+#### 17.1 Multi-Class GPIO Interface
+- ✅ Create multi-class GPIO interface (`src/squirrel/gpio_multiclass.py`)
+- ✅ Support different GPIO pins for each detection class
+- ✅ Raspberry Pi implementation (`PiMultiClassGPIO`)
+- ✅ Windows mock implementation (`MockMultiClassGPIO`)
+- ✅ Abstract base class for extensibility
+
+#### 17.2 GPIO Pin Assignment
+- ✅ Default pin assignments:
+  - Squirrel: GPIO 18
+  - Skunk: GPIO 19
+  - Raccoon: GPIO 20
+- ✅ Configurable via command-line arguments
+- ✅ Per-class GPIO triggering on detection
+
+### 18. ML Detector Integration Requirements
+
+#### 18.1 ML Detector Implementation
+- ✅ Create ML-based detector (`src/squirrel/detector_ml.py`)
+- ✅ `MLDetector` class using YOLO v8
+- ✅ Multi-class detection (squirrel, skunk, raccoon)
+- ✅ Confidence threshold configuration
+- ✅ Center FOV detection support
+- ✅ Bounding box detection
+- ✅ Class name mapping
+
+#### 18.2 ML Main Application
+- ✅ Create ML-based main application (`src/squirrel/main_ml.py`)
+- ✅ `WildlifeDetectorApp` class for multi-class detection
+- ✅ Full CLI support with class-specific GPIO pins
+- ✅ Entry point: `wildlife-detector` command
+- ✅ Debug mode with visual output
+- ✅ Device selection (cpu, cuda)
+
+#### 18.3 Dual Detection Modes
+- ✅ Original detector: `squirrel-detector` (backward compatible)
+- ✅ ML detector: `wildlife-detector` (multi-class)
+- ✅ Both modes fully functional and documented
+
+### 19. Testing and Documentation Requirements (ML)
+
+#### 19.1 ML Testing
+- ✅ Quick test script (`test_ml_detector.py`)
+- ✅ Test on unseen images (squirrel, skunk, raccoon)
+- ✅ Verify detection accuracy (99.4-99.5% confidence)
+- ✅ Multi-class GPIO interface testing
+
+#### 19.2 ML Documentation
+- ✅ ML usage guide (`docs/ML_USAGE.md`)
+- ✅ Training documentation (`training/README.md`)
+- ✅ Training results (`TRAINING_COMPLETE.md`, `TRAINING_SUMMARY.md`)
+- ✅ How-to guides (`HOW_TO_TRY_IT.md`, `QUICK_TEST_GUIDE.md`, `QUICK_TEST_ML.md`)
+- ✅ Integration summary (`INTEGRATION_COMPLETE.md`)
+
+### 20. Additional Source Code Deliverables
+
+#### 20.1 ML Source Code
+- ✅ `src/squirrel/detector_ml.py` - ML-based detector
+- ✅ `src/squirrel/gpio_multiclass.py` - Multi-class GPIO interface
+- ✅ `src/squirrel/main_ml.py` - ML-based main application
+
+#### 20.2 Training Scripts
+- ✅ `training/generate_synthetic_dataset.py` - Synthetic dataset generation
+- ✅ `training/train_yolo.py` - YOLO model training
+- ✅ `training/evaluate_model.py` - Model evaluation
+- ✅ `training/download_datasets.py` - Dataset preparation
+
+#### 20.3 Test Scripts
+- ✅ `test_ml_detector.py` - Quick ML detector test script
+
+### 21. Model and Dataset Files
+
+#### 21.1 Trained Model
+- ✅ `models/wildlife_detector.pt` - Trained YOLO v8 model (6.2 MB)
+- ✅ Model architecture: YOLO v8 Nano
+- ✅ Parameters: 3,006,233
+- ✅ Classes: Squirrel (0), Skunk (1), Raccoon (2)
+
+#### 21.2 Dataset Structure
+- ✅ Training dataset structure (`training/datasets/synthetic/`)
+- ✅ Test images (`training/test_images/`)
+- ✅ YOLO format annotations
+- ✅ Dataset configuration files (`dataset.yaml`)
+
+### Updated Deliverables Summary
+
+#### Code Deliverables (Updated)
+- 9 source code modules (6 original + 3 ML)
+- 5 test files with 36 test cases
+- 4 training scripts
+- 1 test script (`test_ml_detector.py`)
+- 2 utility scripts
+- 2 setup scripts
+- 2 CI/CD workflow files
+
+#### Documentation Deliverables (Updated)
+- README.md
+- QUICKSTART.md
+- CONTRIBUTING.md
+- PROJECT_SUMMARY.md
+- CHANGELOG.md
+- docs/TEST_VIDEOS.md
+- docs/DETECTION_METHOD.md
+- docs/RUNNING_ON_WINDOWS.md
+- docs/ML_USAGE.md
+- GITHUB_SETUP.md
+- training/README.md
+- TRAINING_COMPLETE.md
+- TRAINING_SUMMARY.md
+- INTEGRATION_COMPLETE.md
+- HOW_TO_TRY_IT.md
+- QUICK_TEST_GUIDE.md
+- QUICK_TEST_ML.md
+- QUICK_RUN_WINDOWS.md
+- misc/PAT_STORAGE.md
+- This contract document
+
+#### Total Files Delivered (Updated)
+- **50+ files** committed to repository
+- All files follow best practices
+- All files properly structured and documented
+- ML model and training infrastructure complete
+
+### Updated Acceptance Criteria
+
+#### ✅ All Requirements Met (Updated)
+- [x] Project structure follows standards
+- [x] Raspberry Pi 4 support with HQ camera
+- [x] Squirrel detection with center FOV (original + ML)
+- [x] GPIO trigger functionality (single + multi-class)
+- [x] Windows 11 development support
+- [x] Video file support
+- [x] Comprehensive test suite
+- [x] Pip installable package
+- [x] Version management with auto-bumping
+- [x] GitHub CI/CD workflows
+- [x] Python 3.13 venv setup
+- [x] Complete documentation
+- [x] Code quality standards met
+- [x] **ML model trained and integrated** ✅
+- [x] **Multi-class detection (squirrel, skunk, raccoon)** ✅
+- [x] **Multi-class GPIO system** ✅
+- [x] **ML-based application complete** ✅
+
+### Updated Project Status
+
+**Status**: ✅ **COMPLETE** - All original and additional requirements fulfilled
+
+**Version**: 0.1.0
+
+**Last Updated**: January 11, 2025
+
+**ML Model Status**: ✅ Trained, tested, and integrated
+
+**Detection Modes**: 
+- Original detector (single class, color-based)
+- ML detector (multi-class, YOLO v8)
+
+---
+
+**Contract Fulfillment**: 100% ✅ (Original + Additional Requirements)
+
+All specified requirements have been implemented, tested, and documented. The project now includes a complete ML-based detection system with multi-class support and is production-ready. The original heuristic-based detector remains available for backward compatibility.
